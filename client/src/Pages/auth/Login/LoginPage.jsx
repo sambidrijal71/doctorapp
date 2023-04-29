@@ -40,7 +40,7 @@ const LoginPage = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder='Sam@bid.com' />
         </Form.Item>
 
         <Form.Item
@@ -57,7 +57,7 @@ const LoginPage = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input placeholder='password' />
         </Form.Item>
         <div className='d-flex flex-column'>
           <Link className='link-style' to='/register'>
