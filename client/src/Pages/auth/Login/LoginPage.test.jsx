@@ -1,31 +1,28 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
-import RegisterPage from './RegisterPage'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { screen, render } from '@testing-library/react'
+import { BrowserRouter as Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event'
+import LoginPage from './LoginPage'
 
-test('three input boxes and a button', () => {
-  render(<Router><RegisterPage /></Router>)
+test("Two input box and a button", () => {
+  render(<Router><LoginPage /></Router>)
+
   const inputBoxes = screen.getAllByRole('textbox');
   const button = screen.getByRole('button');
-  const link = screen.getByRole('link', { name: /👉 already a user\?, login here!! 👈/i })
+  const link = screen.getByRole('link', { name: /👉 not a user\?, register here!! 👈/i })
 
-  expect(inputBoxes).toHaveLength(3);
+  expect(inputBoxes).toHaveLength(2);
   expect(button).toBeInTheDocument();
   expect(link).toBeInTheDocument()
 })
 
-test('render name, email and password of the user', async () => {
-  render(<Router><RegisterPage /></Router>)
-  const user = { name: 'sambid', email: 'sam@bid.com', password: 'password' }
-
-  const nameInput = screen.getByRole('textbox', { name: /enter your name\./i })
+test('render email and password of the user', async () => {
+  render(<Router><LoginPage /></Router>)
+  const user = { email: 'sam@bid.com', password: 'password' }
   const emailInput = screen.getByRole('textbox', { name: /enter your email\./i })
   const passwordInput = screen.getByRole('textbox', { name: /enter your password\./i })
   const button = screen.getByRole('button')
 
-  userEvent.click(nameInput)
-  userEvent.keyboard(user.name)
   userEvent.click(emailInput)
   userEvent.keyboard(user.email)
   userEvent.click(passwordInput)
@@ -33,7 +30,6 @@ test('render name, email and password of the user', async () => {
 
   userEvent.click(button);
 
-  expect(await screen.findByRole('textbox', { name: /enter your name\./i })).toHaveValue(user.name)
   expect(await screen.findByRole('textbox', { name: /enter your email\./i })).toHaveValue(user.email)
   expect(await screen.findByRole('textbox', { name: /enter your password\./i })).toHaveValue(user.password)
 })

@@ -1,6 +1,6 @@
-const userModel = require('../models/userModel')
-const { hashPassword, comparePassword } = require('../helpers/passwordHelper')
-const jwt = require('jsonwebtoken')
+const userModel = require('../models/userModel');
+const { hashPassword, comparePassword } = require('../helpers/passwordHelper');
+const jwt = require('jsonwebtoken');
 
 const registerController = async (req, res) => {
   try {
@@ -8,28 +8,28 @@ const registerController = async (req, res) => {
 
     switch (true) {
       case !name: {
-        return res.status(200).send({ success: false, message: "Name field is required." })
+        return res.status(200).send({ success: false, message: "Name field is required." });
       }
       case !email: {
-        return res.status(200).send({ success: false, message: "Email field is required." })
+        return res.status(200).send({ success: false, message: "Email field is required." });
       }
       case !password: {
-        return res.status(200).send({ success: false, message: "Password field is required." })
+        return res.status(200).send({ success: false, message: "Password field is required." });
       }
     }
 
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
-      return res.status(200).send({ success: false, message: "User already exists, please login." })
+      return res.status(200).send({ success: false, message: "User already exists, please login." });
     }
     else {
-      const hashedPassword = await hashPassword(password)
+      const hashedPassword = await hashPassword(password);
       const user = await new userModel({ name, email, password: hashedPassword }).save();
       res.status(201).send({
         success: true, message: "User created successfully. 😊",
         user
-      })
-    }
+      });
+    };
   }
   catch (error) {
     console.log(`${error}`.bgRed);
@@ -37,8 +37,8 @@ const registerController = async (req, res) => {
       success: false,
       message: "Something went wrong in register controller, please try again.",
       error
-    })
-  }
+    });
+  };
 }
 
 
