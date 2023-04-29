@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/doctorapp/static/css/main.e6c13ad2.css",
+    "main.js": "/doctorapp/static/js/main.db120da6.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/doctorapp/static/js/787.c4e7f8f9.chunk.js",
+    "index.html": "/doctorapp/index.html",
+    "main.e6c13ad2.css.map": "/doctorapp/static/css/main.e6c13ad2.css.map",
+    "main.db120da6.js.map": "/doctorapp/static/js/main.db120da6.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/doctorapp/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.db120da6.js"
+  ]
+}
