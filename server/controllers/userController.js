@@ -1,4 +1,4 @@
-import userModel from "../models/userModel";
+const userModel = require('../models/userModel')
 
 const registerController = async (req, res) => {
   try { }
