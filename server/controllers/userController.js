@@ -60,12 +60,10 @@ const loginController = async (req, res) => {
       return res.status(200).send({ success: false, message: "Either email or password is invalid, please try again." })
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })
+    user.password = undefined;
     res.status(201).send({
       success: true, message: `Welcome ${user.name}. 😊`,
-      user: {
-        name: user.name,
-        email: user.email
-      },
+      user,
       token
     })
   }
@@ -79,4 +77,28 @@ const loginController = async (req, res) => {
   }
 }
 
-module.exports = { registerController, loginController }
+const getUserDataController = async (req, res) => {
+  try {
+
+    const user = await userModel.findOne({ _id: req.body.userId });
+    if (!user) {
+      return res.status(200).send({ success: false, message: "Token not verified." })
+    }
+
+    user.password = undefined;
+    res.status(200).send({
+      success: true, message: `Successfully ferched user data.`,
+      data: user
+    })
+  }
+  catch (error) {
+    console.log(`${error}`.bgRed);
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong in getting user data, please try again.",
+      error
+    })
+  }
+}
+
+module.exports = { registerController, loginController, getUserDataController }

@@ -2,20 +2,28 @@ import React from 'react';
 import { Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { hideLoading, showLoading } from '../../../redux/features/alertSlice';
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const onFinish = async (values) => {
     try {
+      dispatch(showLoading());
       const res = await axios.post('/user/login', values);
       if (res.data.success) {
+        dispatch(hideLoading());
         message.success(res.data.message);
         navigate('/');
         localStorage.setItem('token', res.data.token);
       } else {
+        dispatch(hideLoading());
         message.error(res.data.message);
       }
     } catch (error) {
+      dispatch(hideLoading());
       console.log(error);
       message.error(
         'Something went wrong while logging in a user, please try again.'
@@ -57,7 +65,7 @@ const LoginPage = () => {
             },
           ]}
         >
-          <Input placeholder='password' />
+          <Input placeholder='password' type='password' />
         </Form.Item>
         <div className='d-flex flex-column'>
           <Link className='link-style' to='/register'>

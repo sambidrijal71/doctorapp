@@ -76,7 +76,7 @@ const RegisterPage = () => {
             },
           ]}
         >
-          <Input placeholder='password' />
+          <Input placeholder='password' type='password' />
         </Form.Item>
         <div className='d-flex flex-column'>
           <Link className='link-style' to='/login'>

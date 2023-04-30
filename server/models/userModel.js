@@ -13,6 +13,22 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, { message: "Password is a required field." }]
   },
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
+  isDoctor: {
+    type: Boolean,
+    default: false
+  },
+  notifications: {
+    type: Array,
+    default: []
+  },
+  seenNotifications: {
+    type: Array,
+    default: []
+  }
 
 }, { timestamps: true })
 
